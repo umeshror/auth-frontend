@@ -1,4 +1,6 @@
-import { Component } from '@angular/core';
+import {Component} from '@angular/core';
+import {Router} from '@angular/router';
+import {AuthService} from './core/auth';
 
 @Component({
   selector: 'app-root',
@@ -6,5 +8,17 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  title = 'auth-frontend';
+  currentUser: any;
+
+  constructor(
+    private router: Router,
+    private authService: AuthService
+  ) {
+    this.authService.currentUser.subscribe(x => this.currentUser = x);
+  }
+
+  logout() {
+    this.authService.logout();
+    this.router.navigate(['/login']);
+  }
 }
