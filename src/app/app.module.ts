@@ -7,7 +7,6 @@ import {AppComponent} from './app.component';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {MaterialModule} from './material.module';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
-import {TaskListComponent} from './task-list/task-list.component';
 import {LoginComponent} from './core/login';
 import {RegisterComponent} from './core/register';
 import {HomeComponent} from './home';
@@ -19,8 +18,7 @@ import {MatToolbarModule} from '@angular/material/toolbar';
     AppComponent,
     HomeComponent,
     LoginComponent,
-    RegisterComponent,
-    TaskListComponent
+    RegisterComponent
   ],
   imports: [
     BrowserModule,
