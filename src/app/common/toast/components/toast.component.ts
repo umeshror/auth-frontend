@@ -1,8 +1,8 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import {Component, OnInit, OnDestroy} from '@angular/core';
 
-import { Subject } from 'rxjs';
-import { takeUntil } from 'rxjs/operators';
-import { Toast, ToastService } from '../common';
+import {Subject} from 'rxjs';
+import {takeUntil} from 'rxjs/operators';
+import {Toast, ToastService} from '../common';
 
 @Component({
   selector: 'app-toast',
@@ -14,9 +14,10 @@ export class ToastComponent implements OnInit, OnDestroy {
   showToast = false;
   unsubscribeObservable$: Subject<void> = new Subject();
 
-  constructor(private toastService: ToastService) {}
+  constructor(private toastService: ToastService) {
+  }
 
-  ngOnInit() {
+  ngOnInit(): void {
     this.toastService
       .get()
       .pipe(takeUntil(this.unsubscribeObservable$))
@@ -26,11 +27,11 @@ export class ToastComponent implements OnInit, OnDestroy {
       });
   }
 
-  closeToast() {
+  closeToast(): void {
     this.showToast = false;
   }
 
-  ngOnDestroy() {
+  ngOnDestroy(): void {
     this.unsubscribeObservable$.next();
     this.unsubscribeObservable$.complete();
   }

@@ -15,9 +15,9 @@ import {ErrorInterceptor, JwtInterceptor} from './core/interceptors';
 import {MatToolbarModule} from '@angular/material/toolbar';
 import {ToastModule} from './common/toast/toast.module';
 import {MatIconModule} from '@angular/material/icon';
-import {MatSidenavModule} from "@angular/material/sidenav";
-import {MatListModule} from "@angular/material/list";
-import {MatButtonModule} from "@angular/material/button";
+import {MatSidenavModule} from '@angular/material/sidenav';
+import {MatListModule} from '@angular/material/list';
+import {MatButtonModule} from '@angular/material/button';
 
 @NgModule({
   declarations: [
