@@ -1,6 +1,7 @@
 import {BrowserModule} from '@angular/platform-browser';
 import {NgModule} from '@angular/core';
 import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
+import {FlexLayoutModule} from '@angular/flex-layout';
 
 import {AppRoutingModule} from './app-routing.module';
 import {AppComponent} from './app.component';
@@ -12,6 +13,11 @@ import {RegisterComponent} from './core/register';
 import {HomeComponent} from './home';
 import {ErrorInterceptor, JwtInterceptor} from './core/interceptors';
 import {MatToolbarModule} from '@angular/material/toolbar';
+import {ToastModule} from './common/toast/toast.module';
+import {MatIconModule} from '@angular/material/icon';
+import {MatSidenavModule} from "@angular/material/sidenav";
+import {MatListModule} from "@angular/material/list";
+import {MatButtonModule} from "@angular/material/button";
 
 @NgModule({
   declarations: [
@@ -25,10 +31,17 @@ import {MatToolbarModule} from '@angular/material/toolbar';
     AppRoutingModule,
     ReactiveFormsModule,
     MaterialModule,
+    FlexLayoutModule,
     BrowserAnimationsModule,
     HttpClientModule,
     FormsModule,
-    MatToolbarModule
+    MatToolbarModule,
+    ToastModule.forRoot(),
+    MatIconModule,
+    MatSidenavModule,
+    MatListModule,
+    MatButtonModule,
+    FlexLayoutModule
   ],
 
   providers: [

@@ -1,0 +1,5 @@
+.slds-notify--toast, .slds-notify_toast {
+    @media screen and (max-width: 599px) {
+        min-width: unset;
+    }
+}

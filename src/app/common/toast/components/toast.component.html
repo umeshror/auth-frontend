@@ -1,0 +1,10 @@
+<div class="slds-notify_container">
+  <ngl-toast
+    *ngIf="showToast"
+    [variant]="toast?.variant"
+    (close)="closeToast()"
+    [duration]="toast?.duration || 5000"
+  >
+    <h2 class="slds-text-heading_small">{{ toast.message }}</h2>
+  </ngl-toast>
+</div>

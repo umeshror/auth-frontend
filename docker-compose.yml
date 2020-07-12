@@ -15,7 +15,7 @@ services:
       - ../auth-service/env/.env.dev
     volumes:
       - ../auth-service:/app
-      - ../auth-service/static_data:/srv/static
+      - static_data:/srv/static
     depends_on:
       - mysql
     expose:
@@ -28,7 +28,7 @@ services:
       - app
     volumes:
       - ../auth-service/mysql_data:/var/lib/mysql
-      - ../auth-service/static_data:/srv/static:ro  # ro readonly
+      - static_data:/srv/static:ro  # ro readonly
   angular:
     build:
       context: .
@@ -40,3 +40,5 @@ services:
       - /app/node_modules
     ports:
       - "4200:4200"
+volumes:
+  static_data:
