@@ -3,11 +3,15 @@
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
-    "start": "ng serve --host=0.0.0.0",
+    "start": "ng serve --env=local",
+    "start-compose": "ng serve --host=0.0.0.0",
     "build": "ng build",
     "test": "ng test",
     "lint": "ng lint",
-    "e2e": "ng e2e"
+    "e2e": "ng e2e",
+    "build-dev": "ng build --target=development --environment=dev",
+    "build-qa": "ng build --target=production --environment=qa",
+    "build-prod": "ng build --prod"
   },
   "private": true,
   "dependencies": {
