@@ -14,7 +14,7 @@ services:
     env_file:
       - ../auth-service/env/.env.dev
     volumes:
-      - ../auth-service/:/app
+      - ../auth-service:/app
       - ../auth-service/static_data:/srv/static
     depends_on:
       - mysql
@@ -36,7 +36,7 @@ services:
     depends_on:
       - app
     volumes:
-      - .:/app/
+      - .:/app
       - /app/node_modules
     ports:
       - "4200:4200"
