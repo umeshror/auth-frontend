@@ -77,9 +77,9 @@ jobs:
           name: Deploy to S3
           command: |
             if [ "${CIRCLE_BRANCH}" == "staging" ]; then
-                aws --region us-west-2 s3 sync dist/auth-frontend s3://auth-frontend-us-qa/ --delete
+                aws --region us-west-2 s3 sync dist/auth-frontend s3://auth-frontend-us2-qa/ --delete
             elif [ "${CIRCLE_BRANCH}" == "master" ]; then
-                aws --region us-west-2 s3 sync dist/auth-frontend s3://auth-frontend-us/ --delete
+                aws --region us-west-2 s3 sync dist/auth-frontend s3://auth-frontend-us2/ --delete
             fi
 workflows:
   version: 2
