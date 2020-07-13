@@ -52,7 +52,6 @@ jobs:
                 key: v1-dist-{{ .Environment.CIRCLE_BRANCH }}-{{ .Environment.CIRCLE_SHA1 }}
                 paths:
                     - dist
-                    -
 workflows:
     version: 2
     # The build and deploy workflow
@@ -61,12 +60,12 @@ workflows:
             - build
             # The deploy job will only run on the filtered branches and
             # require the build job to be successful before it starts
-            - deploy:
-                requires:
-                    - build
-                filters:
-                    branches:
-                        only:
-                            - develop
-                            - staging
-                            - master
+#            - deploy:
+#                requires:
+#                    - build
+#                filters:
+#                    branches:
+#                        only:
+#                            - develop
+#                            - staging
+#                            - master

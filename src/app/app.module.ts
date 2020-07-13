@@ -12,12 +12,7 @@ import {LoginComponent} from './core/login';
 import {RegisterComponent} from './core/register';
 import {HomeComponent} from './home';
 import {ErrorInterceptor, JwtInterceptor} from './core/interceptors';
-import {MatToolbarModule} from '@angular/material/toolbar';
 import {ToastModule} from './common/toast/toast.module';
-import {MatIconModule} from '@angular/material/icon';
-import {MatSidenavModule} from '@angular/material/sidenav';
-import {MatListModule} from '@angular/material/list';
-import {MatButtonModule} from '@angular/material/button';
 
 @NgModule({
   declarations: [
@@ -30,17 +25,12 @@ import {MatButtonModule} from '@angular/material/button';
     BrowserModule,
     AppRoutingModule,
     ReactiveFormsModule,
+    BrowserAnimationsModule,
     MaterialModule,
     FlexLayoutModule,
-    BrowserAnimationsModule,
     HttpClientModule,
     FormsModule,
-    MatToolbarModule,
     ToastModule.forRoot(),
-    MatIconModule,
-    MatSidenavModule,
-    MatListModule,
-    MatButtonModule,
     FlexLayoutModule
   ],
 
