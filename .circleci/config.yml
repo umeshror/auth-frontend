@@ -44,7 +44,7 @@ jobs:
                         npm run build-qa
                     elif [ "${CIRCLE_BRANCH}" == "master" ]; then
                         npm run build-prod
-                    elseo
+                    else
                         npm run build
                     fi
             # Cache the dist folder for the deploy job
