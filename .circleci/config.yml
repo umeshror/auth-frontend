@@ -71,13 +71,15 @@ jobs:
           name: Install aws cli
           command:
             sudo apt-get -y -qq install awscli
+      # Deploy to the S3 bucket corresponding to the current branch
+      # region: AWS_DEFAULT_REGION
       - run:
           name: Deploy to S3
           command: |
             if [ "${CIRCLE_BRANCH}" == "staging" ]; then
-                aws --region ap-south-1 s3 sync dist s3://auth-frontend-us-qa/ --delete
+                aws --region ap-south-1 s3 sync dist/auth-frontend s3://auth-frontend-us-qa/ --delete
             elif [ "${CIRCLE_BRANCH}" == "master" ]; then
-                aws --region ap-south-1 s3 sync dist s3://auth-frontend-us/ --delete
+                aws --region ap-south-1 s3 sync dist/auth-frontend s3://auth-frontend-us/ --delete
             fi
 workflows:
   version: 2
@@ -93,6 +95,5 @@ workflows:
           filters:
             branches:
               only:
-                - develop
                 - staging
                 - master
