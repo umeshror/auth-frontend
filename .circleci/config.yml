@@ -34,7 +34,7 @@ jobs:
             # Test the source code
             - run:
                 name: Testing
-                command: npm run test
+                command: npm run test -- --watch=false
             # Build project with different configuration based on
             # the current branch
             - run:
@@ -43,8 +43,8 @@ jobs:
                     if [ "${CIRCLE_BRANCH}" == "staging" ]; then
                         npm run build-qa
                     elif [ "${CIRCLE_BRANCH}" == "master" ]; then
-                        npm run build --configuration=production
-                    else
+                        npm run build-prod
+                    elseo
                         npm run build
                     fi
             # Cache the dist folder for the deploy job
