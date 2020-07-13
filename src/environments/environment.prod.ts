@@ -1,4 +1,4 @@
 export const environment = {
   production: true,
-  apiUrl: 'http://localhost:80'
+  apiUrl: 'auth-service-dev.us-west-2.elasticbeanstalk.com'
 };
