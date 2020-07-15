@@ -31,7 +31,7 @@ export class LoginComponent implements OnInit {
 
   ngOnInit(): void {
     this.loginForm = this.formBuilder.group({
-      username: ['', Validators.required],
+      email: ['', [Validators.required, Validators.email]],
       password: ['', Validators.required]
     });
 
@@ -61,7 +61,7 @@ export class LoginComponent implements OnInit {
     }
 
     this.loading = true;
-    this.authService.login(this.form.username.value, this.form.password.value)
+    this.authService.login(this.form.email.value, this.form.password.value)
       .pipe(
         //  unsubscribes from the observable immediately after the first value is emitted.
         first()

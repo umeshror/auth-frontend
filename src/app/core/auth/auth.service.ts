@@ -3,7 +3,7 @@ import {HttpClient} from '@angular/common/http';
 import {BehaviorSubject, Observable} from 'rxjs';
 import {map} from 'rxjs/operators';
 import {environment} from '../../../environments/environment';
-import {User} from './models/user.model';
+import {GoogleUser, User} from './models/user.model';
 
 @Injectable({providedIn: 'root'})
 export class AuthService {
@@ -23,20 +23,40 @@ export class AuthService {
     return this.currentUserSubject.value;
   }
 
-  public login(username, password): Observable<User> {
-    return this.http.post<any>(`${environment.apiUrl}/jwt/token/`, {username, password})
+  public login(email, password): Observable<User> {
+    return this.http.post<User>(`${environment.apiUrl}/jwt/token/`, {email, password})
       .pipe(map(user => {
-        // store user details and jwt token in local storage to keep user logged in between page refreshes
-        localStorage.setItem('currentUser', JSON.stringify(user));
-        this.currentUserSubject.next(user);
-        return user;
+        return this.addUserSession(user);
       }));
+  }
+
+
+  public googleLogin(data: GoogleUser): Observable<User> {
+    return this.http.post<User>(`${environment.apiUrl}/google-auth/`, data)
+      .pipe(map(user => {
+        return this.addUserSession(user);
+      }));
+  }
+
+  private addUserSession(user: User): User {
+    // store user details and jwt token in local storage to keep user logged in between page refreshes
+    localStorage.setItem('currentUser', JSON.stringify(user));
+    this.currentUserSubject.next(user);
+    return user;
   }
 
   public logout(): void {
     // remove user from local storage and set current user to null
     localStorage.removeItem('currentUser');
     this.currentUserSubject.next(null);
+    this.googleLogout();
+  }
+
+
+  public googleLogout(): void {
+    // @ts-ignore
+    const auth2 = gapi.auth2.getAuthInstance();
+    auth2.signOut();
   }
 
   handleLoginCallback(): void {

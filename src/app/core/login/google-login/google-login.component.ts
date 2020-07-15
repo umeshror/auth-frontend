@@ -1,7 +1,8 @@
 import {AfterViewInit, Component, OnInit} from '@angular/core';
-import {environment} from "../../../../environments/environment";
+import {AuthService} from "../../auth";
 
 declare const gapi: any;
+
 @Component({
   selector: 'app-google-login',
   templateUrl: './google-login.component.html',
@@ -9,43 +10,42 @@ declare const gapi: any;
 })
 export class GoogleLoginComponent implements OnInit, AfterViewInit {
 
-  private clientId: string = environment.CLIENT_ID;
-  private scope = [
-    'profile',
-    'email'
-  ].join(' ');
 
-  public auth2: any;
-
-  constructor() {
+  constructor(private authService: AuthService) {
   }
 
   ngOnInit(): void {
   }
 
   ngAfterViewInit(): void {
-    this.googleOnInit()
+    this.googleOnInit();
   }
 
-  public googleOnInit(): void{
-        gapi.signin2.render('my-signin2', {
+  private googleOnInit(): void {
+    gapi.signin2.render('my-signin2', {
       'scope': 'profile email',
       'width': 240,
       'height': 50,
       'longtitle': true,
       'theme': 'dark',
-      'onsuccess': this.onSignIn,
+      'onsuccess': param => this.onSignIn(param),
       'onfailure': this.onFailure
     });
   }
-  public onSignIn(googleUser): void {
-    console.log('googleUser');
-    console.log(googleUser);
-    console.log(googleUser.getBasicProfile())
+
+  private onSignIn(googleUser): void {
+    const userProfile = googleUser.getBasicProfile();
+    const data = {
+      email: userProfile.getEmail(),
+      first_name: userProfile.getGivenName(),
+      last_name: userProfile.getFamilyName(),
+      profile_picture_url: userProfile.getImageUrl(),
+      token: userProfile.id_token,
+    };
+    this.authService.googleLogin(data);
   }
 
   public onFailure(error): void {
     console.log(error);
   }
 }
-
