@@ -1,7 +1,7 @@
 :host {
   display: flex;
   justify-content: center;
-  margin: 100px 0px;
+  margin: 100px 0;
 }
 
 .mat-form-field {
@@ -9,10 +9,8 @@
   min-width: 300px;
 }
 
-mat-card-title,
-mat-card-content {
-  display: flex;
-  justify-content: center;
+.mat-card-content{
+  padding-top: 15px;
 }
 
 .error {

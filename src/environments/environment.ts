@@ -4,6 +4,7 @@
 export const environment = {
   apiUrl: 'http://localhost:80',
   production: false,
+  CLIENT_ID: '875831318978-m4tkd9v4dhq2cb3uqjmv3mro5ls1hhc2.apps.googleusercontent.com'
 };
 /*
  * For easier debugging in development mode, you can import the following file

@@ -2,7 +2,6 @@ import {BrowserModule} from '@angular/platform-browser';
 import {NgModule} from '@angular/core';
 import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
 import {FlexLayoutModule} from '@angular/flex-layout';
-
 import {AppRoutingModule} from './app-routing.module';
 import {AppComponent} from './app.component';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
@@ -13,13 +12,16 @@ import {RegisterComponent} from './core/register';
 import {HomeComponent} from './home';
 import {ErrorInterceptor, JwtInterceptor} from './core/interceptors';
 import {ToastModule} from './common/toast/toast.module';
+import {GoogleLoginComponent} from './core/login/google-login/google-login.component';
+import {MatTabsModule} from '@angular/material/tabs';
 
 @NgModule({
   declarations: [
     AppComponent,
     HomeComponent,
     LoginComponent,
-    RegisterComponent
+    RegisterComponent,
+    GoogleLoginComponent
   ],
   imports: [
     BrowserModule,
@@ -31,7 +33,7 @@ import {ToastModule} from './common/toast/toast.module';
     HttpClientModule,
     FormsModule,
     ToastModule.forRoot(),
-    FlexLayoutModule
+    MatTabsModule,
   ],
 
   providers: [
