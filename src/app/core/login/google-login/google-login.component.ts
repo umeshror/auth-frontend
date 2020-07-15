@@ -1,5 +1,8 @@
 import {AfterViewInit, Component, OnInit} from '@angular/core';
 import {AuthService} from "../../auth";
+import {first} from "rxjs/operators";
+import {GoogleUser} from "../../auth/models/user.model";
+import {ActivatedRoute, Router} from "@angular/router";
 
 declare const gapi: any;
 
@@ -10,8 +13,15 @@ declare const gapi: any;
 })
 export class GoogleLoginComponent implements OnInit, AfterViewInit {
 
+  loading = false;
+  returnUrl: string;
+  error: string;
+  success: string;
 
-  constructor(private authService: AuthService) {
+  constructor(private authService: AuthService,
+              private route: ActivatedRoute,
+              private router: Router) {
+    this.returnUrl = this.route.snapshot.queryParams.returnUrl || '/';
   }
 
   ngOnInit(): void {
@@ -40,10 +50,28 @@ export class GoogleLoginComponent implements OnInit, AfterViewInit {
       first_name: userProfile.getGivenName(),
       last_name: userProfile.getFamilyName(),
       profile_picture_url: userProfile.getImageUrl(),
-      token: userProfile.id_token,
+      token: userProfile.getId(),
     };
-    this.authService.googleLogin(data);
+    this.googleLogin(data);
   }
+
+  private googleLogin(data: GoogleUser): void {
+    this.error = null;
+    this.success = null;
+    this.loading = true;
+
+    this.authService.googleLogin(data)
+      .pipe(first())
+      .subscribe(
+        data => {
+          this.router.navigate([this.returnUrl]);
+        },
+        data => {
+          this.error = data;
+          this.loading = false;
+        });
+  }
+
 
   public onFailure(error): void {
     console.log(error);

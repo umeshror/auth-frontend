@@ -4,6 +4,7 @@ import {BehaviorSubject, Observable} from 'rxjs';
 import {map} from 'rxjs/operators';
 import {environment} from '../../../environments/environment';
 import {GoogleUser, User} from './models/user.model';
+declare const gapi: any;
 
 @Injectable({providedIn: 'root'})
 export class AuthService {
@@ -46,17 +47,21 @@ export class AuthService {
   }
 
   public logout(): void {
+    this.googleLogout();
     // remove user from local storage and set current user to null
     localStorage.removeItem('currentUser');
     this.currentUserSubject.next(null);
-    this.googleLogout();
   }
 
 
   public googleLogout(): void {
     // @ts-ignore
-    const auth2 = gapi.auth2.getAuthInstance();
-    auth2.signOut();
+    const auth2 = gapi.auth2;
+    if (auth2 !== undefined) {
+      // @ts-ignore
+      const authInstance = auth2.getAuthInstance();
+      authInstance.signOut();
+    }
   }
 
   handleLoginCallback(): void {
