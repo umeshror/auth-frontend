@@ -16,6 +16,7 @@ export class RegisterComponent implements OnInit {
   loading = false;
   submitted = false;
   error: string;
+  hidePassword = true;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -30,11 +31,13 @@ export class RegisterComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    let MOBILE_PATTERN = /[0-9\+\-\ ]/;
+
     this.registerForm = this.formBuilder.group({
       first_name: ['', Validators.required],
-      last_name: ['', Validators.required],
+      last_name: [''],
       email: ['', [Validators.email, Validators.required]],
-      phone_number: ['', Validators.required],
+      phone_number: ['', [Validators.pattern(MOBILE_PATTERN)]],
       password: ['', [Validators.required, Validators.minLength(6)]]
     });
   }

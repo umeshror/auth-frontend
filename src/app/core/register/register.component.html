@@ -1,52 +1,68 @@
-<div *ngIf="error" class="alert alert-danger">{{error}}</div>
-<h2>Register</h2>
-<form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
-  <div class="form-group">
-    <label for="first_name">First Name</label>
-    <input type="text" formControlName="first_name" class="form-control"
-           [ngClass]="{ 'is-invalid': submitted && f.first_name.errors }"/>
-    <div *ngIf="submitted && f.first_name.errors" class="invalid-feedback">
-      <div *ngIf="f.first_name.errors.required">First Name is required</div>
+<mat-card-content>
+  <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+    <div
+      fxLayout="row"
+      fxLayoutAlign="center"
+      fxLayoutGap="10px"
+    >
+      <mat-form-field>
+        <input type="text" matInput placeholder="First name"
+               formControlName="first_name">
+      </mat-form-field>
+      <mat-form-field>
+        <input type="text" matInput placeholder="Last name"
+               formControlName="last_name">
+      </mat-form-field>
     </div>
-  </div>
-  <div class="form-group">
-    <label for="last_name">Last Name</label>
-    <input type="text" formControlName="last_name" class="form-control"
-           [ngClass]="{ 'is-invalid': submitted && f.last_name.errors }"/>
-    <div *ngIf="submitted && f.last_name.errors" class="invalid-feedback">
-      <div *ngIf="f.last_name.errors.required">Last Name is required</div>
+
+    <div fxLayout="column">
+      <mat-form-field fxFlex>
+          <input type="email" matInput placeholder="Email"
+                 formControlName="email">
+        <!--    <mat-error *ngIf="email.invalid">{{getErrorMessage()}}</mat-error>-->
+        <mat-error *ngIf="registerForm.get('email').invalid">
+          Updates can’t save if the new available amount is below zero
+        </mat-error>
+
+      </mat-form-field>
+
     </div>
-  </div>
-  <div class="form-group">
-    <label for="email">Email</label>
-    <input type="text" formControlName="email" class="form-control"
-           [ngClass]="{ 'is-invalid': submitted && f.email.errors }"/>
-    <div *ngIf="submitted && f.email.errors" class="invalid-feedback">
-      <div *ngIf="f.email.errors.required">Email is required</div>
+    <div fxLayout="row">
+      <mat-form-field fxFlex>
+        <input type="text" matInput placeholder="Phone number (optional)"
+               formControlName="phone_number">
+      </mat-form-field>
     </div>
-  </div>
-  <div class="form-group">
-    <label for="phone_number">Phone number</label>
-    <input type="text" formControlName="phone_number" class="form-control"
-           [ngClass]="{ 'is-invalid': submitted && f.phone_number.errors }"/>
-    <div *ngIf="submitted && f.phone_number.errors" class="invalid-feedback">
-      <div *ngIf="f.phone_number.errors.required">Phone number is required</div>
+
+    <div fxLayout="row">
+      <mat-form-field fxFlex>
+
+        <input matInput [type]="hidePassword ? 'password' : 'text'"
+               placeholder="Password" formControlName="password">
+        <button mat-icon-button matSuffix
+                (click)="hidePassword = !hidePassword"
+                [attr.aria-label]="'Hide password'"
+                [attr.aria-pressed]="hidePassword">
+
+          <mat-icon>{{hidePassword ? 'visibility_off' : 'visibility'}}</mat-icon>
+        </button>
+      </mat-form-field>
     </div>
-  </div>
-  <div class="form-group">
-    <label for="password">Password</label>
-    <input type="password" formControlName="password" class="form-control"
-           [ngClass]="{ 'is-invalid': submitted && f.password.errors }"/>
-    <div *ngIf="submitted && f.password.errors" class="invalid-feedback">
-      <div *ngIf="f.password.errors.required">Password is required</div>
-      <div *ngIf="f.password.errors.minlength">Password must be at least 6 characters</div>
+
+    <div fxLayout="row" fxLayoutAlign="end center" fxLayoutGap="10px">
+      <div>
+        <a routerLink="/login" class="btn btn-link">Cancel</a>
+
+      </div>
+      <div>
+
+        <button [disabled]="loading" type="submit"
+                mat-raised-button color="primary">
+          Register
+        </button>
+      </div>
     </div>
-  </div>
-  <div class="form-group">
-    <button [disabled]="loading" class="btn btn-primary">
-      <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>
-      Register
-    </button>
-    <a routerLink="/login" class="btn btn-link">Cancel</a>
-  </div>
-</form>
+
+
+  </form>
+</mat-card-content>
