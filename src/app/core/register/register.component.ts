@@ -60,8 +60,7 @@ export class RegisterComponent implements OnInit {
       .pipe(first())
       .subscribe(
         data => {
-          this.loading = false;
-          this.router.navigate(['/login'], {queryParams: {registered: true}});
+          this.userLogin();
         },
         err => {
           this.loading = false;
@@ -73,6 +72,14 @@ export class RegisterComponent implements OnInit {
           this.formError = err.error;
         }
       );
+  }
+
+  private userLogin(): void {
+    this.authService.login(this.form.email.value, this.form.password.value)
+      .pipe(first())
+      .subscribe(data => {
+        this.router.navigate(['/']);
+      });
   }
 
 }
