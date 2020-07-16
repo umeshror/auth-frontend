@@ -66,8 +66,8 @@ export class GoogleLoginComponent implements OnInit, AfterViewInit {
               this.router.navigate([this.returnUrl]);
 
             },
-            data => {
-              this.error = data;
+            error => {
+              this.error = error;
               this.loading = false;
             }
           );

@@ -4,6 +4,7 @@ import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {first} from 'rxjs/operators';
 import {AuthService} from '../auth';
 import {UserService} from './user.service';
+import {HttpErrorResponse} from "@angular/common/http";
 
 
 @Component({
@@ -14,8 +15,7 @@ import {UserService} from './user.service';
 export class RegisterComponent implements OnInit {
   registerForm: FormGroup;
   loading = false;
-  submitted = false;
-  error: string;
+  formError: string;
   hidePassword = true;
 
   constructor(
@@ -31,7 +31,7 @@ export class RegisterComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    let MOBILE_PATTERN = /[0-9\+\-\ ]/;
+    const MOBILE_PATTERN = /[0-9\+\-\ ]/;
 
     this.registerForm = this.formBuilder.group({
       first_name: ['', Validators.required],
@@ -43,12 +43,12 @@ export class RegisterComponent implements OnInit {
   }
 
   // convenience getter for easy access to form fields
-  get f(): any {
+  get form(): any {
     return this.registerForm.controls;
   }
 
   public onSubmit(): void {
-    this.submitted = true;
+    this.formError = null;
 
     // stop here if form is invalid
     if (this.registerForm.invalid) {
@@ -60,11 +60,19 @@ export class RegisterComponent implements OnInit {
       .pipe(first())
       .subscribe(
         data => {
+          this.loading = false;
           this.router.navigate(['/login'], {queryParams: {registered: true}});
         },
-        error => {
-          this.error = error;
+        err => {
           this.loading = false;
-        });
+          if (err.error.email) {
+            this.form.email.setErrors({
+              serverError: ['User with this email address already exists']
+            });
+          }
+          this.formError = err.error;
+        }
+      );
   }
+
 }
