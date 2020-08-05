@@ -1,0 +1,53 @@
+:host {
+  display: flex;
+  justify-content: center;
+  margin: 100px 0;
+}
+
+.mat-form-field {
+  width: 100%;
+}
+
+.mat-card-content {
+  padding-top: 15px;
+}
+
+.button {
+  display: flex;
+  justify-content: flex-end;
+}
+
+
+.horizontal-line {
+  text-align: center;
+  position: relative;
+  z-index: 2;
+
+  .center-text {
+    margin: 0;
+    padding: 0 10px;
+    background: #fff;
+    display: inline-block;
+  }
+
+  :after {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 0;
+    right: 0;
+    border-top: solid 1px black;
+    z-index: -1;
+  }
+
+}
+
+.form-error {
+  margin-top: -15px;
+  font-size: small;
+  color: red;
+}
+
+.mat-card-content {
+  padding-top: 15px;
+}

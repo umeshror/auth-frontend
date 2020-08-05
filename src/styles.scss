@@ -2,3 +2,25 @@
 
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+/* for sidenav to take a whole page */
+html, body {
+    margin: 0;
+    height: 100%;
+}
+@import "assets/variables";
+@import "assets/landing";
+
+
+.light-gray {
+  background: rgba(0, 0, 0, .024);
+}
+
+.row-height-100{
+  height: 100%;
+}
+
+.mat-dialog-container{
+  padding: 0 !important;
+}
+

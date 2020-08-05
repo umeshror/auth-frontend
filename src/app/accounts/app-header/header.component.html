@@ -1,0 +1,38 @@
+<mat-toolbar color="primary">
+  <div fxHide.gt-xs>
+    <button mat-icon-button (click)="onToggleSidenav()">
+      <mat-icon>menu</mat-icon>
+    </button>
+  </div>
+  <div class="brand">
+    <a routerLink="/">Auth</a>
+  </div>
+  <div>
+    <a href="#" mat-button>
+      Find Classes
+    </a>
+  </div>
+  <div>
+    <a mat-button>
+      About
+    </a>
+  </div>
+
+  <div fxFlex fxLayout fxLayoutAlign="end" fxHide.xs>
+    <button mat-button [matMenuTriggerFor]="notiMenu">
+      <mat-icon>notifications</mat-icon>
+    </button>
+    <mat-menu #notiMenu="matMenu">
+      <button mat-menu-item>My Account</button>
+      <button (click)="logout()" mat-menu-item>Logout</button>
+    </mat-menu>
+
+    <button mat-button [matMenuTriggerFor]="accountMenu">
+      <mat-icon>account_box</mat-icon>
+    </button>
+    <mat-menu #accountMenu="matMenu">
+      <button mat-menu-item>My Account</button>
+      <button (click)="logout()" mat-menu-item>Logout</button>
+    </mat-menu>
+  </div>
+</mat-toolbar>

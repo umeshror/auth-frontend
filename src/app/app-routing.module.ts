@@ -1,16 +1,15 @@
 import {NgModule} from '@angular/core';
 import {RouterModule, Routes} from '@angular/router';
-import {LoginComponent} from './core/login';
-import {RegisterComponent} from './core/register';
-import {AuthGuard} from './core/auth';
-import {HomeComponent} from './home';
-
+import {AuthGuard} from './accounts/auth';
+import {HomeComponent} from './landing';
 
 const routes: Routes = [
-  {path: '', component: HomeComponent, canActivate: [AuthGuard]},
-  {path: 'login', component: LoginComponent},
-  {path: 'register', component: RegisterComponent},
+  {path: '', component: HomeComponent},
+  {
+    path: 'accounts',
+    loadChildren: () => import('./accounts/auth.module').then(module => module.AuthModule)
 
+  },
   // otherwise redirect to home
   {path: '**', redirectTo: ''}
 ];

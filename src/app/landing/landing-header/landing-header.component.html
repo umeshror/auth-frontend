@@ -1,0 +1,58 @@
+<header id="home-header" [ngClass]="{'header-fixed': isFixed}">
+  <div class="container" fxLayout="row wrap" fxLayoutAlign="start center">
+    <div class="header-mobile-top" fxLayout="row" fxLayoutWrap="wrap" fxLayoutAlign="start center">
+      <div class="home-logo mr-1">
+        <a href="/"><img width="60" src="assets/images/holamind1.png" alt="Holaskills logo"></a> &nbsp;&nbsp;&nbsp;
+      </div>
+      <button mat-icon-button id="menu-toggle" (click)="toggleMenu()">
+        <mat-icon>menu</mat-icon>
+      </button>
+    </div>
+    <div fxFlex class="top-menu">
+
+      <button mat-button class="hometop-btn" scrollTo="service-section">
+        <strong>About</strong>
+      </button>
+
+      <button mat-button class="hometop-btn" scrollTo="portfolio-section">
+        <strong>Services</strong>
+      </button>
+
+
+      <button mat-button class="hometop-btn" scrollTo="testimonials-section">
+        <strong>Testimonials</strong>
+      </button>
+
+
+      <span fxFlex></span>
+
+      <div fxFlex fxLayout fxLayoutAlign="end" fxHide.xs>
+
+        <button mat-button
+                class="hometop-btn"
+                routerLink="/accounts/login"
+                *ngIf="!isLoggedIn">
+          <mat-icon>login</mat-icon>
+          Login | Register
+        </button>
+        <button mat-button [matMenuTriggerFor]="notiMenu" *ngIf="isLoggedIn">
+          <mat-icon>notifications</mat-icon>
+        </button>
+        <mat-menu #notiMenu="matMenu">
+          <button mat-menu-item>My Account</button>
+          <button (click)="logout()" mat-menu-item>Logout</button>
+        </mat-menu>
+
+        <button mat-button [matMenuTriggerFor]="accountMenu" *ngIf="isLoggedIn">
+          <mat-icon>account_box</mat-icon>
+          <strong> My Account</strong>
+        </button>
+        <mat-menu #accountMenu="matMenu">
+          <button mat-menu-item>My Account</button>
+          <button (click)="logout()" mat-menu-item>Logout</button>
+        </mat-menu>
+
+      </div>
+    </div>
+  </div>
+</header>
