@@ -10,7 +10,7 @@ services:
     volumes:
       - ../auth-service/mysql_data:/var/lib/mysql
   app:
-    build: ../auth-service
+    image: umeshvjti/auth-service:latest
     env_file:
       - ../auth-service/env/.env.dev
     volumes:
